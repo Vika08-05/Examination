@@ -21,6 +21,35 @@
   font-weight: 450
 }
 
+.fa-trash{
+  font-size: 18px;
+  color: red;
+}
+.fa-pencil{
+  font-size: 18px;
+  color: blue;
+}
+.fa-calendar::before{
+  font-size: 18px;
+  color: green;
+}
+.searchinput{
+  height: 20px;
+  border: 1px solid grey;
+  margin-right: 10px;
+  border-radius: 10px;
+  margin-left: 40%;
+  outline-offset: -12px;
+  padding: 5px;
+}
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font-family: none;
+  font-size: 16px;
+  line-height: inherit;
+}
+
+
 .today,
 .tomorrow {
   color: #153063;

@@ -1,8 +1,12 @@
 import React, { Fragment } from "react"
 import '../../index.css';
-
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { saveData } from "../../Services/api-service"
+import { render } from "react-dom";
 
 const Main = () => {
+    
     return (
         <Fragment>
             <div className="page">
@@ -23,7 +27,7 @@ const Main = () => {
                             checked></input><span className="task">Create new templates</span><span className="float-right"><i class="fa fa-trash ml-4" aria-hidden="true"></i><i class="fa fa-pencil ml-4" aria-hidden="true"></i><i class="fa fa-calendar ml-4" aria-hidden="true"></i></span> </p>
 
                         <p><input style={{ marginRight: "1%" }} type="radio" id="huey" name="drone" value="huey"
-                            checked></input><span className="task">Lunch with Anna</span> <span className="float-right"><i class="fa fa-trash ml-4" aria-hidden="true"></i><i class="fa fa-pencil ml-4" aria-hidden="true"></i><i class="fa fa-calendar ml-4" aria-hidden="true"></i></span> </p>
+                            checked></input><span className="task">Lunch with Anna</span> <span className="float-right"><i class="fa fa-trash  ml-4" aria-hidden="true"></i><i class="fa fa-pencil ml-4" aria-hidden="true"></i><i class="fa fa-calendar ml-4" aria-hidden="true"></i></span> </p>
                     </div>
                 </div>
             </div>
