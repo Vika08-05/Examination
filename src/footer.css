@@ -4,7 +4,7 @@
 .bg-white {
     position: relative;
     width: 90%;
-    border-radius: 6px;
+    border-radius: 5px;
     margin: 0 auto;
     border-left: 1px solid rgba(0,0,0,.125);
     border-right: 1px solid rgba(0,0,0,.125);
