@@ -16,6 +16,7 @@ import {
 import Main from "./Components/Main/main"
 import Header from "./Components/Header/header"
 import Footer from "./Components/Footer/footer"
+import newTask from "././Components/newTask/newTask"
 
 class App extends Component {
 
@@ -28,6 +29,7 @@ class App extends Component {
           <Header />
           <Switch>
             <Route path="/" exact component={Main} />
+            <Route path="/newTask" exact component={newTask} />
           </Switch>
           <Footer />
         </Router>
