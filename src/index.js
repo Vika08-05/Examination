@@ -13,17 +13,17 @@ import {
   Link
 } from "react-router-dom";
 
+
+
 import Main from "./Components/Main/main"
 import Header from "./Components/Header/header"
 import Footer from "./Components/Footer/footer"
-import newTask from "././Components/newTask/newTask"
-import page404 from "././Components/Error404/page404"
+import newTask from "./Components/newTask/newTask"
+import page404 from "./Components/Error404/page404"
 
 class App extends Component {
 
-
   render() {
-
     return (
       <Provider store={store}>
         <Router>
@@ -31,11 +31,11 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={Main} />
             <Route path="/newTask" exact component={newTask} />
-            <Route  component={page404} />
+            <Route component={page404} />
           </Switch>
           <Footer />
         </Router>
-      </Provider>
+   </Provider>
 
     )
   }

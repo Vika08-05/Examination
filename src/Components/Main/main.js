@@ -1,33 +1,33 @@
-import React, { Fragment } from "react"
-import '../../index.css';
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { saveData } from "../../Services/api-service"
-import { render } from "react-dom";
+import React, { Fragment, useEffect } from "react"
+import { connect } from "react-redux"
+import { updateDatabase } from "../../Services/api-service"
+import { getAllToDoS } from "../../Actions/ToDoListActions"
 
-const Main = () => {
+
+
+const Main = ({ getAllToDoS }) => {
+
+    useEffect(() => {
+        updateDatabase().then(data => {
+           getAllToDoS(data)
+        })
+    },[])
+
     return (
-        <Fragment>
-            <div className="page">
-                <div className="card">
-                    <div className="card-body">
-                        <p className="heading1"> <span className="today">Today</span> <span className="float-right headingright"></span> </p>
-                        <p> <input style={{ marginRight: "1%" }} type="checkbox" id="huey" name="drone" value="huey"></input><span className="task mt-4">Take kids to school</span><span className="float-right"><i class="fa fa-trash ml-4" aria-hidden="true"></i><i class="fa fa-pencil ml-4" aria-hidden="true"></i><i class="fa fa-calendar ml-4" aria-hidden="true"></i></span> </p>
-
-
-                        <p><input style={{ marginRight: "1%" }} type="checkbox" id="huey" name="drone" value="huey"></input><span className="task">Process email</span><span className="float-right"><i class="fa fa-trash ml-4" aria-hidden="true"></i><i class="fa fa-pencil ml-4" aria-hidden="true"></i><i class="fa fa-calendar ml-4" aria-hidden="true"></i></span> </p>
-
-                        <p> <input style={{ marginRight: "1%" }} type="checkbox" id="huey" name="drone" value="huey"></input><span className="task">Daily Stand-Up meeting</span><span className="float-right"><i class="fa fa-trash ml-4" aria-hidden="true"></i><i class="fa fa-pencil ml-4" aria-hidden="true"></i><i class="fa fa-calendar ml-4" aria-hidden="true"></i></span> </p>
-
-                        <p><input style={{ marginRight: "1%" }} type="checkbox" id="huey" name="drone" value="huey"></input><span className="task">Create new templates</span><span className="float-right"><i class="fa fa-trash ml-4" aria-hidden="true"></i><i class="fa fa-pencil ml-4" aria-hidden="true"></i><i class="fa fa-calendar ml-4" aria-hidden="true"></i></span> </p>
-
-                        <p><input style={{ marginRight: "1%" }} type="checkbox" id="huey" name="drone" value="huey"></input><span className="task">Lunch with Anna</span> <span className="float-right"><i class="fa fa-trash  ml-4" aria-hidden="true"></i><i class="fa fa-pencil ml-4" aria-hidden="true"></i><i class="fa fa-calendar ml-4" aria-hidden="true"></i></span> </p>
-                    </div>
+        <div className="page">
+            <div className="card">
+                <div className="card-body">
+                    <p className="heading1"> <span className="today">Today</span><span className="float-right headingright"></span></p>
                 </div>
             </div>
-        </Fragment>
+        </div>
     )
 }
-
-
-export default Main
+const mapStateToProps = ({ ToDoListReducer }) => {
+    const { List } = ToDoListReducer;
+    return { List }
+}
+const mapDispatchToProps = {
+    getAllToDoS,
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

@@ -9,7 +9,7 @@ class Header extends React.Component {
     render() {
         return (
             <div className="card-header" style={{ marginBottom: "-4%" }}>
-                <p> <i Name="fa fa-bars"></i><i class="fa fa-calendar ml-4" aria-hidden="true"></i><input class="fa fa-calendar ml-4" aria-hidden="true" disabled value={this.state.curTime}></input> <input type="search" class="searchinput"></input><i className="fa fa-search" aria-hidden="true"></i> <span className="float-right"> <Link to="/" className="mr-4 navTask">Task</Link> <Link to="/newTask"  className="mr-4">New</Link></span> </p>
+                <p> <i name="fa fa-bars"></i><i className="fa fa-calendar ml-4" aria-hidden="true"></i><input className="fa fa-calendar ml-4" aria-hidden="true" disabled value={this.state.curTime}></input> <input type="search" className="searchinput"></input><i className="fa fa-search" aria-hidden="true"></i> <span className="float-right"> <Link to="/" className="mr-4 navTask">Task</Link> <Link to="/newTask"  className="mr-4">New</Link></span> </p>
             </div>
         )
     }

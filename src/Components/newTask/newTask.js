@@ -1,61 +1,83 @@
 import React from "react"
-import ReactDOM from "react-dom"
 import './newTask.css';
+import { Redirect } from "react-router-dom";
+import { saveData } from "../../Services/api-service"
+import { addNewToDo } from "../../Actions/ToDoListActions"
+import { connect } from "react-redux"
 
-
+//Import uuid
+import { v4 as uuidv4 } from "uuid"
 
 class newTask extends React.Component {
+
     state = {
-        Task: "Task",
-        Where: "Where",
-        Time: "Time",
+        "Task": " ",
+        "Time": "",
+        "Priority": "",
+        "isRedirect": false
     }
 
+    /////
     getTask = (event) => {
-        this.setState = ({
+        this.setState({
             Task: event.target.value
         })
     }
-    getWhere = (event) => {
-        this.setState = ({
-            Where: event.target.value
-        })
-    }
     getTime = (event) => {
-        this.setState = ({
+        this.setState({
             Time: event.target.value
         })
     }
+    getPriority = (event) => {
+        this.setState({
+            Priority: event.target.value
+        })
+    }
+
+    addNewToDos = (event) => {
+        event.preventDefault();
+        const { Task,Time,Priority } = this.state;
+        const Id = uuidv4();
+        const addNewDo = { Id, Task,Time,Priority};
+        const { List,addNewToDo} = this.props;
+        const NewList = [...List, addNewDo]
+        saveData(NewList);
+        this.setState({
+            isRedirect: true
+        })
+        console.log(NewList)
+    }
 
     render() {
-
+        const { isRedirect } = this.state
+        if (isRedirect) {
+            return (
+                <Redirect to="/" />
+            )
+        }
 
         return (
-            < form className="form-horizontal">
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="email">Task:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="text" placeholder="Enter New Task" />
+            < form className="form-horizontal" onSubmit={this.addNewToDos}>
+                <div className="form-group">
+                    <label className="control-label col-sm-2">Task:</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="text" onChange={this.getTask} placeholder="Enter New Task" />
                     </div>
                 </div>
-                <div class="form-group col-sm-5">
-                    <label class="control-label col-sm-2" style={{ marginLeft: "-16px" }} for="pwd">Date:</label>
+                <div className="form-group col-sm-5">
+                    <label className="control-label col-sm-2" style={{ marginLeft: "-16px" }}>Date:</label>
                     <div >
-                        <input type="date" name="calendar" className="callist" value="2021-07-22" min="2021-01-01" max="2021-12-31" />
+                        <input type="text" name="cal" onChange={this.getTime} className="callist" placeholder="Enter Date" />
                     </div>
                 </div>
                 <div>
                     <div className="col-sm-5 seleclist">
-                        <label for="sel1">Priority:</label>
-                        <select class="form-control" placeholder="Priority" value="Priority" id="sel1">
-                            <option>Low Priority</option>
-                            <option>High Priority</option>
-                            <option>Medium Priority</option>
-                        </select>
+                        <label>Priority:</label>
+                        <input type="text" name="cal" className="callist" onChange={this.getPriority} placeholder="Enter Priority ( High, Low, Medium )" />
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
+                <div className="form-group">
+                    <div className="col-sm-offset-2 col-sm-10">
                         <button className="btn-block btn-primary sub" style={{ color: "white" }, { marginTop: "20px" }}> Submit </button>
                     </div>
                 </div>
@@ -63,5 +85,11 @@ class newTask extends React.Component {
         )
     }
 }
-
-export default newTask
+const mapStateToProps = ({ ToDoListReducer }) => {
+    const { List } = ToDoListReducer
+    return { List }
+}
+const mapDispatchToProps = {
+    addNewToDo,
+}
+export default connect(mapStateToProps, mapDispatchToProps)(newTask)

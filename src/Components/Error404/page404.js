@@ -1,5 +1,4 @@
-import React, { Fragment } from "react"
-import { Link } from "react-router-dom"
+import React from "react"
 import './page404.css';
 class page404 extends React.Component {
     render() {
@@ -14,6 +13,4 @@ class page404 extends React.Component {
 
 
 }
-
-
 export default page404
