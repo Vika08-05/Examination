@@ -9,7 +9,7 @@ const Main = ({ getAllToDoS }) => {
 
     useEffect(() => {
         updateDatabase().then(data => {
-           getAllToDoS(data)
+            getAllToDoS(data)
         })
     },[])
 

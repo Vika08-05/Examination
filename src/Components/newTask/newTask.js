@@ -11,8 +11,8 @@ import { v4 as uuidv4 } from "uuid"
 class newTask extends React.Component {
 
     state = {
-        "Task": " ",
-        "Time": "",
+        "Task": 1,
+        "Time": " ",
         "Priority": "",
         "isRedirect": false
     }
@@ -36,17 +36,18 @@ class newTask extends React.Component {
 
     addNewToDos = (event) => {
         event.preventDefault();
-        const { Task,Time,Priority } = this.state;
+        const {Task,Time,Priority } = this.state;
         const Id = uuidv4();
-        const addNewDo = { Id, Task,Time,Priority};
-        const { List,addNewToDo} = this.props;
-        const NewList = [...List, addNewDo]
+        const NewToDo = { Id,Task,Time,Priority }
+        const { List } = this.props;
+        const NewList = [...List, NewToDo]
         saveData(NewList);
         this.setState({
             isRedirect: true
         })
         console.log(NewList)
     }
+
 
     render() {
         const { isRedirect } = this.state
