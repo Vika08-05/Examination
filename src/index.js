@@ -19,6 +19,7 @@ import Main from "./Components/Main/main"
 import Header from "./Components/Header/header"
 import Footer from "./Components/Footer/footer"
 import newTask from "./Components/newTask/newTask"
+import editToDo from "./Components/Edit/edit"
 import page404 from "./Components/Error404/page404"
 
 class App extends Component {
@@ -31,6 +32,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={Main} />
             <Route path="/newTask" exact component={newTask} />
+            <Route path="/editToDo" exact component={editToDo} />
             <Route component={page404} />
           </Switch>
           <Footer />

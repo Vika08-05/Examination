@@ -1,20 +1,17 @@
 import React from "react"
-// import './newTask.css';
+import '../newTask/newTask.css';
 import { Redirect } from "react-router-dom";
+import { editToDo } from "../../Actions/ToDoListActions";
 import { saveData } from "../../Services/api-service"
-import { addNewToDo } from "../../Actions/ToDoListActions"
 import { connect } from "react-redux"
 
-//Import uuid
-import { v4 as uuidv4 } from "uuid"
 
-class newTask extends React.Component {
+class Edit extends React.Component {
 
     state = {
-        "Task": "",
-        "Time": " ",
-        "Priority": "",
-        "Click": false,
+        "Task": this.props.List.Task,
+        "Time": this.props.List.Time,
+        "Priority": this.props.List.Priority,
         "isRedirect": false
     }
 
@@ -35,24 +32,24 @@ class newTask extends React.Component {
         })
     }
 
-    addNewToDos = (event) => {
+
+
+    addEditNewToDo = (event) => {
         event.preventDefault();
-        const { Task, Time, Priority } = this.state;
-        const Id = uuidv4();
-        const addNewDo = { Id, Task, Time, Priority };
+        const { Id, Task, Time, Priority } = this.state;
+        const newContact = { Id, Task, Time, Priority };
         const { List } = this.props;
-        const NewList = [...List, addNewDo]
+        const NewList = [...List, newContact]
         saveData(NewList).then(() => {
             this.setState({
                 isRedirect: true
             })
         })
-
     }
 
 
     render() {
-        const { isRedirect } = this.state
+        const { Task, Time, Priority, isRedirect } = this.state;
         if (isRedirect) {
             return (
                 <Redirect to="/" />
@@ -60,23 +57,23 @@ class newTask extends React.Component {
         }
 
         return (
-            < form className="form-horizontal" onSubmit={this.addNewToDos}>
+            < form className="form-horizontal" onSubmit={this.editNewToDo}>
                 <div className="form-group">
                     <label className="control-label col-sm-2">Task:</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="text" onChange={this.getTask} placeholder="Enter New Task" />
+                        <input type="text" className="form-control" id="text" onChange={this.getTask} placeholder={Task} />
                     </div>
                 </div>
                 <div className="form-group col-sm-5">
                     <label className="control-label col-sm-2" style={{ marginLeft: "-16px" }}>Date:</label>
                     <div >
-                        <input type="text" name="cal" onChange={this.getTime} className="callist" placeholder="Enter Date" />
+                        <input type="text" name="cal" onChange={this.getTime} className="callist" placeholder={Time} />
                     </div>
                 </div>
                 <div>
                     <div className="col-sm-5 seleclist">
                         <label>Priority:</label>
-                        <input type="text" name="cal" className="callist" onChange={this.getPriority} placeholder="Enter Priority ( High, Low, Medium )" />
+                        <input type="text" name="cal" className="callist" onChange={this.getPriority} placeholder={Priority} />
                     </div>
                 </div>
                 <div className="form-group">
@@ -93,6 +90,6 @@ const mapStateToProps = ({ ToDoListReducer }) => {
     return { List }
 }
 const mapDispatchToProps = {
-    addNewToDo
+    editToDo
 }
-export default connect(mapStateToProps, mapDispatchToProps)(newTask)
+export default connect(mapStateToProps, mapDispatchToProps)(Edit)

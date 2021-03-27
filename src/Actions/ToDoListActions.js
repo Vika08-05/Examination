@@ -24,4 +24,11 @@ export const searchToDo = (ToDo) => {
         type: "SEARCH_TODO",
         payload: ToDo
     }
+}
+
+export const editToDo = (ToDo) => {
+    return {
+        type: "EDIT_TODO",
+        payload: ToDo
+    }
 } 
