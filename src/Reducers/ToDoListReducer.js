@@ -10,9 +10,7 @@ const ToDoListReducer = (state = initialState, action) => {
             }
         case "ADD_NEW_TODO":
             return {
-                ToDoList: [
-                    ...state.ToDoList,
-                    action.payload]
+                List: action.payload
             }
         case "DELETE_TODO":
             return {

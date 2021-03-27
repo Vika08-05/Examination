@@ -36,15 +36,17 @@ class newTask extends React.Component {
 
     addNewToDos = (event) => {
         event.preventDefault();
-        const {Task,Time,Priority } = this.state;
+        const { Task, Time, Priority } = this.state;
         const Id = uuidv4();
-        const NewToDo = { Id,Task,Time,Priority }
+        const addNewDo = { Id, Task, Time, Priority };
         const { List } = this.props;
-        List.push(NewToDo)
-        saveData(List);
-        this.setState({
-            isRedirect: true
+        const NewList = [...List, addNewDo]
+        saveData(NewList).then(() => {
+            this.setState({
+                isRedirect: true
+            })
         })
+
     }
 
 

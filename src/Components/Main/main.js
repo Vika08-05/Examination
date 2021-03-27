@@ -14,7 +14,7 @@ const Main = ({ List, getAllToDo }) => {
         updateDatabase().then(data => {
             getAllToDo(data);
         })
-    }, [])
+    })
 
     const item = List.map(contact => {
         return (
