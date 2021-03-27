@@ -18,3 +18,10 @@ export const deleteToDo = (ToDoList) => {
         payload: ToDoList
     }
 }
+
+export const searchToDo = (ToDo) => {
+    return {
+        type: "SEARCH_TODO",
+        payload: ToDo
+    }
+} 

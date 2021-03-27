@@ -6,7 +6,7 @@ import ToDoListItems from "./ToDoList/ToDoListItems"
 
  
 
-const Main = ({ List, getAllToDo }) => {
+const Main = ({ List,CurrentToDo, getAllToDo }) => {
 
     useEffect(() => {
         updateDatabase().then(data => {
@@ -26,7 +26,16 @@ const Main = ({ List, getAllToDo }) => {
                 <div className="card">
                     <div className="card-body">
                         <p className="heading1"> <span className="today">Today</span><span className="float-right headingright"></span></p>
-                        {item.length > 0 ? item : <h2>ToDo list is empty</h2>}
+                        {/* {item.length > 0 ? item : <h2>ToDo list is empty</h2>} */}
+                        {CurrentToDo.length === 0 ? List.map(contact => {
+                                            return (
+                                                <ToDoListItems key={contact.Id} {...contact} />
+                                            )
+                                        }) : CurrentToDo.map(contact => {
+                                            return (
+                                                <ToDoListItems key={contact.Id} {...contact} />
+                                            )
+                                        })}
                     </div>
                 </div>
             </div>
