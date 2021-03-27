@@ -28,11 +28,10 @@ class ToDoListItem extends React.Component {
         })
     }
 
-
     render() {
         const { Task, Time, Priority } = this.props;
         return (
-            <p><input style={{ marginRight: "1%" }} type="checkbox"  id="huey" name="drone" value="huey"></input><span className="task">{Task}</span>
+            <p><input style={{ marginRight: "1%" }} type="checkbox" id="cbox2" name="drone" value="huey"></input><label id="cbox2" className="task">{Task}</label>
                 <span className="float-right"><span>{Time}</span>
                     <span>{Priority}</span>
                     <i className="fa fa-trash del ml-4" aria-hidden="true" onClick={this.Delete}></i>

@@ -14,7 +14,6 @@ class newTask extends React.Component {
         "Task": "",
         "Time": " ",
         "Priority": "",
-        "Click": false,
         "isRedirect": false
     }
 

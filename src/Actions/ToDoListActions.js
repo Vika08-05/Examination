@@ -31,4 +31,4 @@ export const editToDo = (ToDo) => {
         type: "EDIT_TODO",
         payload: ToDo
     }
-} 
+}

@@ -13,7 +13,9 @@ body{
 .page {
   margin-top: 50px;
 }
-
+#cbox2:checked + label {
+  text-decoration: line-through;
+}
 .float-right.headingright {
   color: #153063;
   font-weight: 500;
