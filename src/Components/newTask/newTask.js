@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from "uuid"
 class newTask extends React.Component {
 
     state = {
-        "Task": 1,
+        "Task": "",
         "Time": " ",
         "Priority": "",
         "isRedirect": false
@@ -40,12 +40,11 @@ class newTask extends React.Component {
         const Id = uuidv4();
         const NewToDo = { Id,Task,Time,Priority }
         const { List } = this.props;
-        const NewList = [...List, NewToDo]
-        saveData(NewList);
+        List.push(NewToDo)
+        saveData(List);
         this.setState({
             isRedirect: true
         })
-        console.log(NewList)
     }
 
 
@@ -91,6 +90,6 @@ const mapStateToProps = ({ ToDoListReducer }) => {
     return { List }
 }
 const mapDispatchToProps = {
-    addNewToDo,
+    addNewToDo
 }
 export default connect(mapStateToProps, mapDispatchToProps)(newTask)

@@ -1,5 +1,6 @@
 const initialState = {
-    List: [],
+    List: [ ],
+    CurrentToDo:"",
 }
 const ToDoListReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -9,7 +10,9 @@ const ToDoListReducer = (state = initialState, action) => {
             }
         case "ADD_NEW_TODO":
             return {
-                List: action.payload
+                ToDoList: [
+                    ...state.ToDoList,
+                    action.payload]
             }
         case "DELETE_TODO":
             return {

@@ -1,24 +1,25 @@
-import React, { Fragment, useEffect } from "react"
-import { Link } from "react-router-dom";
+import React, { Fragment } from "react"
 import '../../../index.css';
 import { connect } from "react-redux";
-import { deleteToDo } from "../../../Actions/ToDoListActions";
-import { saveData } from "../../../Services/api-service"
+// import { deleteToDo } from "../../../Actions/ToDoListActions";
+// import { saveData } from "../../../Services/api-service"
 
 
-class ToDoListItems extends React.Component {
+class ToDoListItem extends React.Component {
 
-    Delete = () => {
-		const { List } = this.props;		
-		const index = List.findIndex((elem) => elem.Id === this.props.Id);
-		const { onDelete } = this.props;				
-		List.splice(index, 1);		
-		onDelete(List);
-		saveData(List);
-    }
+    // Delete = () => {
+    // 	const { List } = this.props;		
+    // 	const index = List.findIndex((elem) => elem.Id === this.props.Id);
+    //     const { deleteToDo } = this.props;
+    // 	List.splice(index, 1);		
+    // 	deleteToDo(List);
+    // 	saveData(List);
+    // }
+
 
     render() {
         const { Task, Time, Priority } = this.props;
+
         return (
             <div className="page">
                 <div className="card">
@@ -34,7 +35,7 @@ const mapStateToProps = ({ ToDoListReducer }) => {
     const { List } = ToDoListReducer
     return { List }
 }
-const mapDispatchToProps = {
-    deleteToDo,
-}
-export default connect(mapStateToProps, mapDispatchToProps)(ToDoListItems);
+// const mapDispatchToProps = {
+//     deleteToDo,
+// }
+export default connect(mapStateToProps, null)(ToDoListItem);

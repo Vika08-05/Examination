@@ -1,4 +1,4 @@
-export const getAllToDoS = (ToDoList) => {
+export const getAllToDo = (ToDoList) => {
     return {
         type: "TODO_LIST_LOADER",
         payload: ToDoList

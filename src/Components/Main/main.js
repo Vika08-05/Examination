@@ -1,33 +1,46 @@
 import React, { Fragment, useEffect } from "react"
 import { connect } from "react-redux"
+// import ToDoListItem from "./ToDoList/ToDoListItems"
 import { updateDatabase } from "../../Services/api-service"
-import { getAllToDoS } from "../../Actions/ToDoListActions"
+import { getAllToDo } from "../../Actions/ToDoListActions"
+import ToDoListItems from "./ToDoList/ToDoListItems"
 
 
+// 
 
-const Main = ({ getAllToDoS }) => {
+const Main = ({ List, getAllToDo }) => {
 
     useEffect(() => {
         updateDatabase().then(data => {
-            getAllToDoS(data)
+            getAllToDo(data);
         })
-    },[])
+    }, [])
+
+    const item = List.map(contact => {
+        return (
+            <ToDoListItems Id={contact.Id} key={contact.Id} Task={contact.Task} Time={contact.Time} Priority={contact.Priority} />
+        )
+    })
 
     return (
-        <div className="page">
-            <div className="card">
-                <div className="card-body">
-                    <p className="heading1"> <span className="today">Today</span><span className="float-right headingright"></span></p>
+        <Fragment>
+            <div className="page">
+                <div className="card">
+                    <div className="card-body">
+                        <p className="heading1"> <span className="today">Today</span><span className="float-right headingright"></span></p>
+                        {item.length > 0 ? item : <h2>ToDo list is empty</h2>}
+                    </div>
                 </div>
             </div>
-        </div>
+        </Fragment>
+
     )
 }
 const mapStateToProps = ({ ToDoListReducer }) => {
-    const { List } = ToDoListReducer;
-    return { List }
+    const { List, CurrentToDo } = ToDoListReducer;
+    return { List, CurrentToDo }
 }
 const mapDispatchToProps = {
-    getAllToDoS,
+    getAllToDo
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
