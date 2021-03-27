@@ -1,12 +1,10 @@
 import React, { Fragment, useEffect } from "react"
 import { connect } from "react-redux"
-// import ToDoListItem from "./ToDoList/ToDoListItems"
 import { updateDatabase } from "../../Services/api-service"
 import { getAllToDo } from "../../Actions/ToDoListActions"
 import ToDoListItems from "./ToDoList/ToDoListItems"
 
-
-// 
+ 
 
 const Main = ({ List, getAllToDo }) => {
 
