@@ -9,9 +9,9 @@ import { connect } from "react-redux"
 class Edit extends React.Component {
 
     state = {
-        "Task": this.props.List.Task,
-        "Time": this.props.List.Time,
-        "Priority": this.props.List.Priority,
+        "Task": this.props.CurrentToDo.Task,
+        "Time": this.props.CurrentToDo.Time,
+        "Priority": this.props.CurrentToDo.Priority,
         "isRedirect": false
     }
 
@@ -33,20 +33,29 @@ class Edit extends React.Component {
     }
 
 
-
-    addEditNewToDo = (event) => {
-        event.preventDefault();
-        const { Id, Task, Time, Priority } = this.state;
-        const newContact = { Id, Task, Time, Priority };
-        const { List } = this.props;
-        const NewList = [...List, newContact]
-        saveData(NewList).then(() => {
-            this.setState({
-                isRedirect: true
-            })
-        })
+    onEditToDo = (Id) => {
+        const { List, editToDo, CurrentToDo } = this.props;
+        if (CurrentToDo !== null) {
+            const newList = List.map((item) => item.Id === CurrentToDo.Id ? {
+                "Task": this.state.Task,
+                "Time": this.state.Time,
+                "Priority": this.state.Priority,
+            } : item);
+            editToDo(newList);
+            saveData(newList).then(() =>
+                this.setState({
+                    isRedirect: true
+                })
+            )
+        }
     }
 
+    editToDoList = (event) =>{
+        event.preventDefault();
+        const {Id, Task, Time, Priority} =  this.props;
+        const item = { Id, Task, Time, Priority};
+        this.onEditToDo(item);
+    }
 
     render() {
         const { Task, Time, Priority, isRedirect } = this.state;
@@ -57,28 +66,28 @@ class Edit extends React.Component {
         }
 
         return (
-            < form className="form-horizontal" onSubmit={this.editNewToDo}>
+            < form className="form-horizontal" onSubmit={this.onEditToDo}>
                 <div className="form-group">
                     <label className="control-label col-sm-2">Task:</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="text" onChange={this.getTask} placeholder={Task} />
+                        <input type="text" className="form-control" id="text" onChange={this.getTask} value={Task} />
                     </div>
                 </div>
                 <div className="form-group col-sm-5">
                     <label className="control-label col-sm-2" style={{ marginLeft: "-16px" }}>Date:</label>
                     <div >
-                        <input type="text" name="cal" onChange={this.getTime} className="callist" placeholder={Time} />
+                        <input type="text" name="cal" onChange={this.getTime} className="callist" value={Time} />
                     </div>
                 </div>
                 <div>
                     <div className="col-sm-5 seleclist">
                         <label>Priority:</label>
-                        <input type="text" name="cal" className="callist" onChange={this.getPriority} placeholder={Priority} />
+                        <input type="text" name="cal" className="callist" onChange={this.getPriority} value={Priority} />
                     </div>
                 </div>
                 <div className="form-group">
                     <div className="col-sm-offset-2 col-sm-10">
-                        <button className="btn-block btn-primary sub" style={{ color: "white" }, { marginTop: "20px" }}> Submit </button>
+                        <button className="btn-block btn-primary sub" style={{ color: "white" }, { marginTop: "20px" }} onClick = {this.editToDoList}> Submit </button>
                     </div>
                 </div>
             </form>
@@ -86,10 +95,11 @@ class Edit extends React.Component {
     }
 }
 const mapStateToProps = ({ ToDoListReducer }) => {
-    const { List } = ToDoListReducer
-    return { List }
+    const { List,CurrentToDo } = ToDoListReducer
+    return { List,CurrentToDo }
 }
 const mapDispatchToProps = {
-    editToDo
+    editToDo,
+    saveData
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Edit)

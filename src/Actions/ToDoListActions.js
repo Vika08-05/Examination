@@ -26,9 +26,9 @@ export const searchToDo = (ToDo) => {
     }
 }
 
-export const editToDo = (ToDo) => {
+export const editToDo = (CurrentToDo) => {
     return {
         type: "EDIT_TODO",
-        payload: ToDo
+        payload: CurrentToDo
     }
 }

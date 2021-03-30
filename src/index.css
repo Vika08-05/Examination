@@ -10,6 +10,9 @@ body{
 .del{
   cursor: pointer;
 }
+/* .high{
+  color: red;
+} */
 .page {
   margin-top: 50px;
 }

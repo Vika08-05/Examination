@@ -12,7 +12,7 @@ class newTask extends React.Component {
 
     state = {
         "Task": "",
-        "Time": " ",
+        "Deadline": " ",
         "Priority": "",
         "isRedirect": false
     }
@@ -38,17 +38,15 @@ class newTask extends React.Component {
         event.preventDefault();
         const { Task, Time, Priority } = this.state;
         const Id = uuidv4();
-        const addNewDo = { Id, Task, Time, Priority };
+        const newToDo = {Id, Task, Time, Priority };
         const { List } = this.props;
-        const NewList = [...List, addNewDo]
-        saveData(NewList).then(() => {
-            this.setState({
-                isRedirect: true
-            })
+        const NewList = [...List, newToDo]
+        addNewToDo(NewList);
+        saveData(NewList);
+        this.setState({
+            isRedirect: true
         })
-
     }
-
 
     render() {
         const { isRedirect } = this.state
@@ -67,9 +65,9 @@ class newTask extends React.Component {
                     </div>
                 </div>
                 <div className="form-group col-sm-5">
-                    <label className="control-label col-sm-2" style={{ marginLeft: "-16px" }}>Date:</label>
+                    <label className="control-label col-sm-2" style={{ marginLeft: "-16px" }}>Deadline:</label>
                     <div >
-                        <input type="text" name="cal" onChange={this.getTime} className="callist" placeholder="Enter Date" />
+                        <input type="text" name="cal" onChange={this.getTime} className="callist" placeholder="Enter Deadline ( 2 days / 3 days )" />
                     </div>
                 </div>
                 <div>
@@ -92,6 +90,6 @@ const mapStateToProps = ({ ToDoListReducer }) => {
     return { List }
 }
 const mapDispatchToProps = {
-    addNewToDo
+    addNewToDo,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(newTask)

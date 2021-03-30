@@ -22,7 +22,7 @@ const ToDoListReducer = (state = initialState, action) => {
         case "EDIT_TODO":
             return {
                 ...state,
-                List: action.payload
+                CurrentToDo: action.payload
             }
         case "SEARCH_TODO":
             if (action.payload === 0) {
