@@ -81,6 +81,7 @@ class newTask extends React.Component {
                         <button className="btn-block btn-primary sub" style={{ color: "white" }, { marginTop: "20px" }}> Submit </button>
                     </div>
                 </div>
+                
             </form>
         )
     }
