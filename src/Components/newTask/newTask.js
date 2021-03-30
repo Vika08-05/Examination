@@ -76,12 +76,15 @@ class newTask extends React.Component {
                         <input type="text" name="cal" className="callist" onChange={this.getPriority} placeholder="Enter Priority ( High, Low, Medium )" />
                     </div>
                 </div>
+
                 <div className="form-group">
+                    
                     <div className="col-sm-offset-2 col-sm-10">
                         <button className="btn-block btn-primary sub" style={{ color: "white" }, { marginTop: "20px" }}> Submit </button>
                     </div>
+
                 </div>
-                
+
             </form>
         )
     }
